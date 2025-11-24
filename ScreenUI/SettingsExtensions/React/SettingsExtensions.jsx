@@ -1,0 +1,228 @@
+import React from 'react';
+
+export default function SettingsExtensions() {
+    return (
+        <div className="bg-background-light dark:bg-background-dark font-display relative flex h-auto min-h-screen w-full flex-col">
+            <style>{`
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+      `}</style>
+
+            {/* External Scripts and Fonts */}
+            <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+            <link href="https://fonts.googleapis.com" rel="preconnect" />
+            <link crossOrigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+            <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+            {/* Tailwind Config */}
+            <script dangerouslySetInnerHTML={{
+                __html: `
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#137fec",
+                "background-light": "#f6f7f8",
+                "background-dark": "#101922",
+              },
+              fontFamily: {
+                "display": ["Space Grotesk", "sans-serif"]
+              },
+              borderRadius: {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+              },
+            },
+          },
+        }
+      `}} />
+
+            <div className="flex h-full min-h-screen grow">
+                {/* SideNavBar */}
+                <nav className="flex h-auto w-64 flex-col border-r border-slate-200/10 bg-white/5 p-4">
+                    <div className="flex flex-col gap-4">
+                        <div className="flex items-center gap-3">
+                            <div className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar image" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCoB4Qf5Jn01eSxeVaYp0Q9jE63g2UN2yE-mJLZshr9jQwDOeMdEeMbbP0gCF63c-D-VxjY724G2DCM5ozT0Ut5G-fvP5CTj26iHSWeJ7q4U0kU4c66bnivuKD1AjeE7oyKimCrjqCGHj_w8CyLwu9gEp0A_RlndtIo6HoO2I2_kFk7NGn2VzySUo7W7dohkDjmtp6hXEq4jl-Ag0c2jppvUf0iREEHWJ6B6aMsBsLg9NOlQvYkPahPcy7dIGPFDUL-HblE1SqJvTOV")' }}></div>
+                            <div className="flex flex-col">
+                                <h1 className="text-white text-base font-medium leading-normal">Alex Grein</h1>
+                                <p className="text-slate-400 text-sm font-normal leading-normal">alex.grein@email.com</p>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-2 mt-4">
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50" href="#">
+                                <span className="material-symbols-outlined text-xl">settings</span>
+                                <p className="text-sm font-medium leading-normal">General</p>
+                            </a>
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50" href="#">
+                                <span className="material-symbols-outlined text-xl">code</span>
+                                <p className="text-sm font-medium leading-normal">Editor</p>
+                            </a>
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50" href="#">
+                                <span className="material-symbols-outlined text-xl">terminal</span>
+                                <p className="text-sm font-medium leading-normal">Terminal</p>
+                            </a>
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50" href="#">
+                                <span className="material-symbols-outlined text-xl">account_tree</span>
+                                <p className="text-sm font-medium leading-normal">Source Control</p>
+                            </a>
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20 text-white" href="#">
+                                <span className="material-symbols-outlined text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>extension</span>
+                                <p className="text-sm font-medium leading-normal">Extensions</p>
+                            </a>
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50" href="#">
+                                <span className="material-symbols-outlined text-xl">keyboard</span>
+                                <p className="text-sm font-medium leading-normal">Keymaps</p>
+                            </a>
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50" href="#">
+                                <span className="material-symbols-outlined text-xl">play_circle</span>
+                                <p className="text-sm font-medium leading-normal">Build & Run</p>
+                            </a>
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50" href="#">
+                                <span className="material-symbols-outlined text-xl">group</span>
+                                <p className="text-sm font-medium leading-normal">Accounts</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div className="flex flex-col gap-4 mt-auto">
+                        <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90">
+                            <span className="truncate">Sync Settings</span>
+                        </button>
+                        <div className="flex flex-col gap-1 border-t border-slate-200/10 pt-4">
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50" href="#">
+                                <span className="material-symbols-outlined text-xl">book_5</span>
+                                <p className="text-sm font-medium leading-normal">Documentation</p>
+                            </a>
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50" href="#">
+                                <span className="material-symbols-outlined text-xl">chat</span>
+                                <p className="text-sm font-medium leading-normal">Feedback</p>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+                {/* Main Content */}
+                <main className="flex-1 overflow-y-auto p-8">
+                    <div className="mx-auto max-w-7xl">
+                        {/* Page Heading */}
+                        <header className="flex flex-wrap justify-between gap-3 mb-6">
+                            <p className="text-white text-4xl font-black leading-tight tracking-[-0.033em] min-w-72">Extensions</p>
+                        </header>
+                        {/* Two-column layout */}
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            {/* Left Column: Installed Extensions */}
+                            <div className="lg:col-span-2 flex flex-col gap-6">
+                                {/* Search Bar */}
+                                <div>
+                                    <label className="flex flex-col min-w-40 h-12 w-full">
+                                        <div className="flex w-full flex-1 items-stretch rounded-lg h-full">
+                                            <div className="text-slate-400 flex border-none bg-slate-800 items-center justify-center pl-4 rounded-l-lg border-r-0">
+                                                <span className="material-symbols-outlined">search</span>
+                                            </div>
+                                            <input className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-lg text-white focus:outline-0 focus:ring-2 focus:ring-inset focus:ring-primary border-none bg-slate-800 h-full placeholder:text-slate-400 px-4 text-base font-normal leading-normal" placeholder="Search Installed Extensions..." defaultValue="" />
+                                        </div>
+                                    </label>
+                                </div>
+                                {/* Section Header */}
+                                <h2 className="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] pb-0 pt-2">Installed (4)</h2>
+                                {/* Extension List Items */}
+                                <div className="flex flex-col gap-2">
+                                    <div className="flex gap-4 bg-slate-800/50 hover:bg-slate-800 rounded-lg p-4 justify-between items-center transition-colors duration-200">
+                                        <div className="flex items-center gap-4 flex-1">
+                                            <div className="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-12" data-alt="Prettier code formatter logo" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBKkwHyR_Fa81eyNkuSRbVzl0pdfP9AytNyLB8Y1U3HkZYo5phlzUkWpiD4QXhyM2gqKd417FY2UmvhQTY_8nDPkGar6Nns-WGfxmSLEjRvFdl3qRdHazOcklKElhvHE4Kgppx-cPjdH43g4dVvHsJVO33M50wOF1GMWMTyuavKyBkHurnP3b56My80knraYBVUZLopd5xqODngidEKcm03f_NKvGLPndiFTCPhx4tquFOaMhGPojggyPKrsvc13fHTmdcPMxKDaGQ7")' }}></div>
+                                            <div className="flex flex-1 flex-col justify-center gap-1">
+                                                <p className="text-white text-base font-medium leading-normal">Prettier - Code Formatter</p>
+                                                <p className="text-slate-400 text-sm font-normal leading-normal">Prettier</p>
+                                                <p className="text-slate-400 text-xs font-normal leading-normal">An opinionated code formatter. (v9.9.0)</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-4 shrink-0">
+                                            <button className="text-slate-400 hover:text-white"><span className="material-symbols-outlined">settings</span></button>
+                                            <button className="text-slate-400 hover:text-white"><span className="material-symbols-outlined">delete</span></button>
+                                            <label className="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary">
+                                                <div className="h-full w-[27px] rounded-full bg-white transition-transform" style={{ boxShadow: 'rgba(0, 0, 0, 0.15) 0px 3px 8px, rgba(0, 0, 0, 0.06) 0px 3px 1px' }}></div>
+                                                <input defaultChecked className="invisible absolute" type="checkbox" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-4 bg-slate-800/50 hover:bg-slate-800 rounded-lg p-4 justify-between items-center transition-colors duration-200">
+                                        <div className="flex items-center gap-4 flex-1">
+                                            <div className="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-12" data-alt="ESLint static analysis tool logo" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAEAPNIHcIqYG6AxnWihdMdRDnruOvw_Gt_26m5WThsorxSP0SjRLHI2IGrslPExQrYKgyHzd0hvgQQfVqLFdoe5tIrncp3Q3lPX03R2B-LxNnWQAQVFo4_O1lxW6LQ9xBkR_JIgbPBhr0oFS82nch56HbTITbF_iZ6GpSO2as9j6seX1-sM6GwaJ7tSdr1qy_rDYQVc1j290Apc1EWJyWhSfU_QmTZl6tDXpU-Ku6jiqxqqqiEu8EuzFefOiJgFR2ClAvWTZtGtkST")' }}></div>
+                                            <div className="flex flex-1 flex-col justify-center gap-1">
+                                                <p className="text-white text-base font-medium leading-normal">ESLint</p>
+                                                <p className="text-slate-400 text-sm font-normal leading-normal">Microsoft</p>
+                                                <p className="text-slate-400 text-xs font-normal leading-normal">Integrates ESLint into the IDE. (v2.4.0)</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-4 shrink-0">
+                                            <span className="text-xs font-semibold text-primary-400 bg-primary/20 px-2 py-1 rounded-full">Update Available</span>
+                                            <button className="text-slate-400 hover:text-white"><span className="material-symbols-outlined">settings</span></button>
+                                            <button className="text-slate-400 hover:text-white"><span className="material-symbols-outlined">delete</span></button>
+                                            <label className="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary">
+                                                <div className="h-full w-[27px] rounded-full bg-white" style={{ boxShadow: 'rgba(0, 0, 0, 0.15) 0px 3px 8px, rgba(0, 0, 0, 0.06) 0px 3px 1px' }}></div>
+                                                <input defaultChecked className="invisible absolute" type="checkbox" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-4 bg-slate-800/50 hover:bg-slate-800 rounded-lg p-4 justify-between items-center transition-colors duration-200">
+                                        <div className="flex items-center gap-4 flex-1">
+                                            <div className="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-12 p-1 bg-white" data-alt="GitLens version control logo" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDNvtjovAOcSKss7NfNlPsBeApmfnr3ae4xLvbAdglfBhRLQGtjTB1-uKatnFlI2Yy2u0N5flgXudGw4nhVdaKvVtBMv6Mtt7iY9dAViyhxQmnkR7JwrKdXIWVwN-DH97H8frbrlQuHDE-H4V4mPfnWesl7oeFY58IiI6PSdQJf2kknWjRLY2hqZFGVmRa2sRQIgyyplBM1gobOvVuo4kJOdoCanjD0_udr0DRBqdfI2Y9CByNueQwfrHwCyF5tPKFB6S2cIPWnucou")' }}></div>
+                                            <div className="flex flex-1 flex-col justify-center gap-1">
+                                                <p className="text-white text-base font-medium leading-normal">GitLens — Git supercharged</p>
+                                                <p className="text-slate-400 text-sm font-normal leading-normal">GitKraken</p>
+                                                <p className="text-slate-400 text-xs font-normal leading-normal">Supercharge Git. (v14.9.0)</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-4 shrink-0">
+                                            <button className="text-slate-400 hover:text-white"><span className="material-symbols-outlined">settings</span></button>
+                                            <button className="text-slate-400 hover:text-white"><span className="material-symbols-outlined">delete</span></button>
+                                            <label className="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary">
+                                                <div className="h-full w-[27px] rounded-full bg-white" style={{ boxShadow: 'rgba(0, 0, 0, 0.15) 0px 3px 8px, rgba(0, 0, 0, 0.06) 0px 3px 1px' }}></div>
+                                                <input defaultChecked className="invisible absolute" type="checkbox" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-4 bg-slate-800/50 hover:bg-slate-800 rounded-lg p-4 justify-between items-center transition-colors duration-200">
+                                        <div className="flex items-center gap-4 flex-1">
+                                            <div className="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-12" data-alt="Live Server logo" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCtXfHkvph1vVmV-AC1Jp50cshLjyRuY95kvXi22LnYjQVERv2vPTCHscoFcDtJLgB-BE13un_NjvA08w7bpqNzSsduh7pnj5GCiuqQ97u20Qd4T2K9ew7ph2JAMlZaZBU-NgzQJKn16M-2XBfpu9W8mQqXf-wUb2l8Z0F2aX5q79TN4Q1OVfCye2w5AQjP4tJW7H44lUAKE90PnA1JUnQAVwNcoiecx5-KUF33j0VM0tLfWMoQr9idLNNDk96WT5tkrJhimFla554N")' }}></div>
+                                            <div className="flex flex-1 flex-col justify-center gap-1">
+                                                <p className="text-white text-base font-medium leading-normal">Live Server</p>
+                                                <p className="text-slate-400 text-sm font-normal leading-normal">Ritwick Dey</p>
+                                                <p className="text-slate-400 text-xs font-normal leading-normal">Launch a development local server. (v5.7.9)</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-4 shrink-0">
+                                            <button className="text-slate-400 hover:text-white"><span className="material-symbols-outlined">settings</span></button>
+                                            <button className="text-slate-400 hover:text-white"><span className="material-symbols-outlined">delete</span></button>
+                                            <label className="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary">
+                                                <div className="h-full w-[27px] rounded-full bg-white" style={{ boxShadow: 'rgba(0, 0, 0, 0.15) 0px 3px 8px, rgba(0, 0, 0, 0.06) 0px 3px 1px' }}></div>
+                                                <input className="invisible absolute" type="checkbox" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* Right Column: Marketplace */}
+                            <div className="lg:col-span-1">
+                                <div className="bg-slate-800/50 rounded-lg p-6 flex flex-col items-start gap-4 sticky top-8">
+                                    <h3 className="text-white text-xl font-bold">Discover Extensions</h3>
+                                    <p className="text-slate-400 text-sm">Expand the capabilities of your IDE. Browse our marketplace for tools and themes to customize your development experience.</p>
+                                    <button className="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 mt-2">
+                                        <span className="truncate">Browse Marketplace</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    );
+}

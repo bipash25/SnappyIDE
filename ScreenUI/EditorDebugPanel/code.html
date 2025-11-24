@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IDE Debug Panel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col">
+<div class="layout-container flex h-full grow flex-row">
+<!-- Simulated Activity Bar -->
+<div class="flex h-screen flex-col items-center gap-4 bg-[#0c131a] p-2">
+<button class="rounded p-2 text-white/50 hover:text-white"><span class="material-symbols-outlined">description</span></button>
+<button class="rounded p-2 text-white/50 hover:text-white"><span class="material-symbols-outlined">search</span></button>
+<button class="rounded bg-primary/20 p-2 text-primary"><span class="material-symbols-outlined">bug_report</span></button>
+<button class="rounded p-2 text-white/50 hover:text-white"><span class="material-symbols-outlined">hub</span></button>
+<button class="rounded p-2 text-white/50 hover:text-white"><span class="material-symbols-outlined">extension</span></button>
+</div>
+<!-- Debug Side Panel -->
+<div class="flex h-screen w-full max-w-sm flex-col border-r border-white/10 bg-background-dark">
+<div class="flex items-center justify-between border-b border-white/10 p-4">
+<h2 class="text-sm font-medium uppercase text-white">Debug</h2>
+</div>
+<!-- Toolbar Component -->
+<div class="flex justify-start gap-1 border-b border-white/10 px-4 py-2">
+<button class="rounded p-2 text-primary transition-colors hover:bg-white/10" title="Continue">
+<span class="material-symbols-outlined text-2xl">play_arrow</span>
+</button>
+<button class="rounded p-2 text-white/80 transition-colors hover:bg-white/10" title="Pause">
+<span class="material-symbols-outlined text-2xl">pause</span>
+</button>
+<button class="rounded p-2 text-white/80 transition-colors hover:bg-white/10" title="Step Over">
+<span class="material-symbols-outlined text-2xl">keyboard_arrow_right</span>
+</button>
+<button class="rounded p-2 text-white/80 transition-colors hover:bg-white/10" title="Step Into">
+<span class="material-symbols-outlined text-2xl">keyboard_arrow_down</span>
+</button>
+<button class="rounded p-2 text-white/80 transition-colors hover:bg-white/10" title="Step Out">
+<span class="material-symbols-outlined text-2xl">keyboard_arrow_up</span>
+</button>
+<button class="rounded p-2 text-white/80 transition-colors hover:bg-white/10" title="Restart">
+<span class="material-symbols-outlined text-2xl">replay</span>
+</button>
+<button class="rounded p-2 text-red-500 transition-colors hover:bg-white/10" title="Stop">
+<span class="material-symbols-outlined text-2xl">stop</span>
+</button>
+</div>
+<!-- Accordions Component -->
+<div class="flex flex-col overflow-y-auto px-2">
+<details class="flex flex-col border-b border-white/10 py-2 group" open="">
+<summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/80 text-xl transition-transform group-open:rotate-90">chevron_right</span>
+<p class="text-white text-xs font-bold uppercase tracking-wider">Variables</p>
+</div>
+</summary>
+<div class="pl-5">
+<div class="flex items-center gap-4 py-2 pl-2">
+<span class="material-symbols-outlined text-white/50 text-xl">subdirectory_arrow_right</span>
+<p class="flex-1 truncate text-sm text-white"><span class="text-amber-400">user</span>: { name: 'John Doe', age: 30 }</p>
+</div>
+<div class="flex items-center gap-4 py-2 pl-2">
+<span class="material-symbols-outlined text-white/50 text-xl">subdirectory_arrow_right</span>
+<p class="flex-1 truncate text-sm text-white"><span class="text-amber-400">isAuthenticated</span>: <span class="text-blue-400">true</span></p>
+</div>
+</div>
+</details>
+<details class="flex flex-col border-b border-white/10 py-2 group" open="">
+<summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/80 text-xl transition-transform group-open:rotate-90">chevron_right</span>
+<p class="text-white text-xs font-bold uppercase tracking-wider">Watch</p>
+</div>
+</summary>
+<div class="pl-5">
+<!-- ListItem Component -->
+<div class="flex items-center gap-4 bg-background-dark py-2 justify-between group/item">
+<div class="flex min-w-0 items-center gap-2">
+<p class="flex-1 truncate text-sm text-white"><span class="text-amber-400">user.age</span>: <span class="text-purple-400">30</span></p>
+</div>
+<button class="shrink-0 opacity-0 transition-opacity group-hover/item:opacity-100">
+<span class="material-symbols-outlined flex size-6 items-center justify-center text-white/50 hover:text-white">close</span>
+</button>
+</div>
+<!-- TextField Component -->
+<div class="flex flex-wrap items-end gap-4 py-2">
+<label class="flex flex-col min-w-40 flex-1">
+<div class="flex w-full flex-1 items-stretch rounded-lg">
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-white/20 bg-white/5 p-2 text-sm text-white placeholder:text-white/40 focus:border-primary focus:outline-0 focus:ring-0 rounded-r-none border-r-0" placeholder="Expression to watch" value=""/>
+<button class="flex items-center justify-center rounded-r-lg border border-l-0 border-white/20 bg-white/5 px-3 text-white/60 hover:bg-white/10 hover:text-white">
+<span class="material-symbols-outlined text-xl">add</span>
+</button>
+</div>
+</label>
+</div>
+</div>
+</details>
+<details class="flex flex-col border-b border-white/10 py-2 group" open="">
+<summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/80 text-xl transition-transform group-open:rotate-90">chevron_right</span>
+<p class="text-white text-xs font-bold uppercase tracking-wider">Call Stack</p>
+</div>
+</summary>
+<div class="pl-2">
+<!-- ListItem Component -->
+<div class="flex cursor-pointer items-center gap-4 rounded-lg bg-primary/20 px-4 py-2">
+<div class="flex flex-col justify-center">
+<p class="text-base font-medium leading-normal text-white line-clamp-1">renderUser</p>
+<p class="text-sm font-normal leading-normal text-white/60 line-clamp-2">profile.js:42</p>
+</div>
+</div>
+<div class="flex cursor-pointer items-center gap-4 rounded-lg px-4 py-2 hover:bg-white/10">
+<div class="flex flex-col justify-center">
+<p class="text-base font-medium leading-normal text-white line-clamp-1">fetchData</p>
+<p class="text-sm font-normal leading-normal text-white/60 line-clamp-2">api.js:15</p>
+</div>
+</div>
+<div class="flex cursor-pointer items-center gap-4 rounded-lg px-4 py-2 hover:bg-white/10">
+<div class="flex flex-col justify-center">
+<p class="text-base font-medium leading-normal text-white line-clamp-1">(anonymous)</p>
+<p class="text-sm font-normal leading-normal text-white/60 line-clamp-2">app.js:10</p>
+</div>
+</div>
+</div>
+</details>
+<details class="flex flex-col border-b border-white/10 py-2 group">
+<summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/80 text-xl transition-transform group-open:rotate-90">chevron_right</span>
+<p class="text-white text-xs font-bold uppercase tracking-wider">Breakpoints</p>
+</div>
+</summary>
+<div class="pl-5">
+<div class="flex items-center gap-3 py-2 group/item">
+<input checked="" class="form-checkbox h-4 w-4 rounded border-white/30 bg-white/10 text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+<div class="flex flex-col">
+<p class="text-sm text-white">profile.js</p>
+<p class="text-xs text-white/50">Line 42</p>
+</div>
+<button class="ml-auto shrink-0 opacity-0 transition-opacity group-hover/item:opacity-100">
+<span class="material-symbols-outlined flex size-6 items-center justify-center text-white/50 hover:text-white">close</span>
+</button>
+</div>
+<div class="flex items-center gap-3 py-2 group/item">
+<input class="form-checkbox h-4 w-4 rounded border-white/30 bg-white/10 text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+<div class="flex flex-col">
+<p class="text-sm text-white">api.js</p>
+<p class="text-xs text-white/50">Line 15</p>
+</div>
+<button class="ml-auto shrink-0 opacity-0 transition-opacity group-hover/item:opacity-100">
+<span class="material-symbols-outlined flex size-6 items-center justify-center text-white/50 hover:text-white">close</span>
+</button>
+</div>
+</div>
+</details>
+</div>
+</div>
+<!-- Draggable Resizer -->
+<div class="w-1 cursor-col-resize bg-black/20 hover:bg-primary"></div>
+<!-- Simulated Main Editor Area -->
+<div class="flex-1 bg-[#0c131a] p-4">
+<p class="text-white/50">Main editor and content area</p>
+</div>
+</div>
+</div>
+</body></html>

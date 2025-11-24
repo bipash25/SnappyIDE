@@ -1,0 +1,286 @@
+import React from 'react';
+
+export default function SettingsTerminal() {
+    return (
+        <div className="bg-background-light dark:bg-background-dark font-display relative flex h-auto min-h-screen w-full flex-col">
+            <style>{`
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+        /* Custom styles for the toggle switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 36px;
+            height: 20px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #4A5568; /* bg-gray-600 */
+            transition: .4s;
+            border-radius: 20px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #137fec; /* bg-primary */
+        }
+        input:focus + .slider {
+            box-shadow: 0 0 1px #137fec;
+        }
+        input:checked + .slider:before {
+            transform: translateX(16px);
+        }
+      `}</style>
+
+            {/* External Scripts and Fonts */}
+            <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+            <link href="https://fonts.googleapis.com" rel="preconnect" />
+            <link crossOrigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+            <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+            {/* Tailwind Config */}
+            <script dangerouslySetInnerHTML={{
+                __html: `
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#137fec",
+                "background-light": "#f6f7f8",
+                "background-dark": "#101922",
+              },
+              fontFamily: {
+                "display": ["Space Grotesk", "sans-serif"]
+              },
+              borderRadius: {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+              },
+            },
+          },
+        }
+      `}} />
+
+            <div className="flex h-full flex-1">
+                {/* SideNavBar */}
+                <aside className="flex w-64 flex-col bg-background-light dark:bg-background-dark border-r border-slate-200 dark:border-slate-800 p-4">
+                    <div className="flex flex-col gap-4">
+                        <div className="flex items-center gap-3">
+                            <div className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User profile picture" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBjEZT0pSJdqu7KsqmWhSK6ZWTcNqx3FgTRJlHBzINMasKiyU6Qim9veAWiC_ocRB9m3IneHY1cxMAn_xSDinqDss55QJqBE5rCyPBZVWu67wPv2Q7GwdbXbTawPOF6JPkkeJDgCLEUygdaLIqHZTrhS9T6WBWkExr4low9__WZxqmY4dLdWAXjG_4s8gEcNTJX2UXXHUX_hAhBeCcoz08RXxxLd2aFkm5f01XnSkrdsZRq8EyghYw-SnO-77hYcdi3h5WyMroJwn8i")' }}></div>
+                            <div className="flex flex-col">
+                                <h1 className="text-slate-900 dark:text-white text-base font-medium leading-normal">Alex Grein</h1>
+                                <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">alex.grein@example.com</p>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-2 mt-4">
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/50" href="#">
+                                <span className="material-symbols-outlined text-slate-600 dark:text-slate-400">settings</span>
+                                <p className="text-slate-800 dark:text-white text-sm font-medium leading-normal">General</p>
+                            </a>
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/50" href="#">
+                                <span className="material-symbols-outlined text-slate-600 dark:text-slate-400">palette</span>
+                                <p className="text-slate-800 dark:text-white text-sm font-medium leading-normal">Appearance</p>
+                            </a>
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/50" href="#">
+                                <span className="material-symbols-outlined text-slate-600 dark:text-slate-400">code</span>
+                                <p className="text-slate-800 dark:text-white text-sm font-medium leading-normal">Editor</p>
+                            </a>
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20 dark:bg-primary/20" href="#">
+                                <span className="material-symbols-outlined text-primary dark:text-primary">terminal</span>
+                                <p className="text-primary dark:text-primary text-sm font-medium leading-normal">Terminal</p>
+                            </a>
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/50" href="#">
+                                <span className="material-symbols-outlined text-slate-600 dark:text-slate-400">hub</span>
+                                <p className="text-slate-800 dark:text-white text-sm font-medium leading-normal">Version Control</p>
+                            </a>
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/50" href="#">
+                                <span className="material-symbols-outlined text-slate-600 dark:text-slate-400">extension</span>
+                                <p className="text-slate-800 dark:text-white text-sm font-medium leading-normal">Extensions</p>
+                            </a>
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/50" href="#">
+                                <span className="material-symbols-outlined text-slate-600 dark:text-slate-400">keyboard</span>
+                                <p className="text-slate-800 dark:text-white text-sm font-medium leading-normal">Keymaps</p>
+                            </a>
+                            <a className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/50" href="#">
+                                <span className="material-symbols-outlined text-slate-600 dark:text-slate-400">system_update</span>
+                                <p className="text-slate-800 dark:text-white text-sm font-medium leading-normal">Updates</p>
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+                {/* Main Content Area */}
+                <main className="flex-1 p-8 overflow-y-auto">
+                    <div className="mx-auto max-w-4xl">
+                        {/* PageHeading */}
+                        <div className="flex flex-wrap justify-between gap-3 mb-6">
+                            <div className="flex flex-col gap-2">
+                                <h1 className="text-slate-900 dark:text-white text-4xl font-bold leading-tight tracking-tight">Terminal</h1>
+                                <p className="text-slate-500 dark:text-slate-400 text-base font-normal leading-normal">Customize the integrated terminal's appearance and behavior.</p>
+                            </div>
+                        </div>
+                        {/* SearchBar */}
+                        <div className="mb-8">
+                            <label className="flex flex-col min-w-40 h-12 w-full">
+                                <div className="flex w-full flex-1 items-stretch rounded-lg h-full">
+                                    <div className="text-slate-400 flex border border-r-0 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 items-center justify-center pl-4 rounded-l-lg">
+                                        <span className="material-symbols-outlined">search</span>
+                                    </div>
+                                    <input className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-l-0 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 h-full placeholder:text-slate-400 dark:placeholder:text-slate-500 px-4 rounded-l-none pl-2 text-base font-normal leading-normal" placeholder="Search terminal settings" defaultValue="" />
+                                </div>
+                            </label>
+                        </div>
+                        <div className="flex flex-col gap-8">
+                            {/* Card: Appearance */}
+                            <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl">
+                                <h2 className="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight px-6 pb-3 pt-5 border-b border-slate-200 dark:border-slate-800">Appearance</h2>
+                                <div className="p-2 space-y-1">
+                                    {/* Setting Row: Font Family */}
+                                    <div className="flex items-center justify-between gap-4 px-4 min-h-[64px] py-2 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-800/40">
+                                        <div className="flex flex-col">
+                                            <p className="text-slate-800 dark:text-white text-base font-medium leading-normal">Font Family</p>
+                                            <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Controls the font family of the terminal.</p>
+                                        </div>
+                                        <input className="form-input w-48 text-right text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary" type="text" defaultValue="Fira Code" />
+                                    </div>
+                                    {/* Setting Row: Font Size */}
+                                    <div className="flex items-center justify-between gap-4 px-4 min-h-[64px] py-2 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-800/40">
+                                        <div className="flex flex-col">
+                                            <p className="text-slate-800 dark:text-white text-base font-medium leading-normal">Font Size</p>
+                                            <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Controls the font size in pixels.</p>
+                                        </div>
+                                        <input className="form-input w-24 text-right text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary" type="number" defaultValue="14" />
+                                    </div>
+                                    {/* Setting Row: Line Height */}
+                                    <div className="flex items-center justify-between gap-4 px-4 min-h-[64px] py-2 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-800/40">
+                                        <div className="flex flex-col">
+                                            <p className="text-slate-800 dark:text-white text-base font-medium leading-normal">Line Height</p>
+                                            <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Controls the line height. Use 0 for default.</p>
+                                        </div>
+                                        <input className="form-input w-24 text-right text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary" type="number" defaultValue="1.2" />
+                                    </div>
+                                    {/* Setting Row: Cursor Style */}
+                                    <div className="flex items-center justify-between gap-4 px-4 min-h-[64px] py-2 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-800/40">
+                                        <div className="flex flex-col">
+                                            <p className="text-slate-800 dark:text-white text-base font-medium leading-normal">Cursor Style</p>
+                                            <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Controls the cursor style.</p>
+                                        </div>
+                                        <select className="form-select w-40 text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary">
+                                            <option>Block</option>
+                                            <option>Underline</option>
+                                            <option>Bar</option>
+                                        </select>
+                                    </div>
+                                    {/* Setting Row: Cursor Blinking */}
+                                    <div className="flex items-center justify-between gap-4 px-4 min-h-[64px] py-2 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-800/40">
+                                        <div className="flex flex-col">
+                                            <p className="text-slate-800 dark:text-white text-base font-medium leading-normal">Cursor Blinking</p>
+                                            <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Controls whether the cursor blinks.</p>
+                                        </div>
+                                        <label className="switch"><input defaultChecked type="checkbox" /><span className="slider"></span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* Card: Behavior */}
+                            <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl">
+                                <h2 className="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight px-6 pb-3 pt-5 border-b border-slate-200 dark:border-slate-800">Behavior</h2>
+                                <div className="p-2 space-y-1">
+                                    {/* Setting Row: Copy on Select */}
+                                    <div className="flex items-center justify-between gap-4 px-4 min-h-[64px] py-2 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-800/40">
+                                        <div className="flex flex-col">
+                                            <p className="text-slate-800 dark:text-white text-base font-medium leading-normal">Copy on Select</p>
+                                            <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Automatically copy text when it is selected.</p>
+                                        </div>
+                                        <label className="switch"><input type="checkbox" /><span className="slider"></span></label>
+                                    </div>
+                                    {/* Setting Row: Scrollback Buffer */}
+                                    <div className="flex items-center justify-between gap-4 px-4 min-h-[64px] py-2 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-800/40">
+                                        <div className="flex flex-col">
+                                            <p className="text-slate-800 dark:text-white text-base font-medium leading-normal">Scrollback Buffer Size</p>
+                                            <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">The number of lines the terminal keeps in its buffer.</p>
+                                        </div>
+                                        <input className="form-input w-24 text-right text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary" type="number" defaultValue="1000" />
+                                    </div>
+                                    {/* Setting Row: Right-click behavior */}
+                                    <div className="flex items-center justify-between gap-4 px-4 min-h-[64px] py-2 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-800/40">
+                                        <div className="flex flex-col">
+                                            <p className="text-slate-800 dark:text-white text-base font-medium leading-normal">Right-click Behavior</p>
+                                            <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Controls how right-clicking behaves in the terminal.</p>
+                                        </div>
+                                        <select className="form-select w-40 text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary">
+                                            <option>Context Menu</option>
+                                            <option>Paste</option>
+                                            <option>Disabled</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* Card: Integrated Shell */}
+                            <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl">
+                                <h2 className="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight px-6 pb-3 pt-5 border-b border-slate-200 dark:border-slate-800">Integrated Shell</h2>
+                                <div className="p-2 space-y-1">
+                                    {/* Setting Row: Default Shell */}
+                                    <div className="flex items-center justify-between gap-4 px-4 min-h-[64px] py-2 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-800/40">
+                                        <div className="flex flex-col">
+                                            <p className="text-slate-800 dark:text-white text-base font-medium leading-normal">Default Shell Profile</p>
+                                            <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">The shell profile used by default.</p>
+                                        </div>
+                                        <select className="form-select w-48 text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary">
+                                            <option>Bash</option>
+                                            <option>Zsh</option>
+                                            <option>PowerShell</option>
+                                            <option>Command Prompt</option>
+                                        </select>
+                                    </div>
+                                    {/* Setting Row: Shell Arguments */}
+                                    <div className="flex items-center justify-between gap-4 px-4 min-h-[64px] py-2 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-800/40">
+                                        <div className="flex flex-col flex-1">
+                                            <p className="text-slate-800 dark:text-white text-base font-medium leading-normal">Shell Execution Arguments</p>
+                                            <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Arguments to pass to the shell on startup.</p>
+                                        </div>
+                                        <input className="form-input w-48 text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary" placeholder="-l" type="text" />
+                                    </div>
+                                    {/* Setting Row: Working Directory */}
+                                    <div className="flex items-center justify-between gap-4 px-4 min-h-[64px] py-2 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-800/40">
+                                        <div className="flex flex-col">
+                                            <p className="text-slate-800 dark:text-white text-base font-medium leading-normal">Working Directory</p>
+                                            <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">The directory the terminal starts in.</p>
+                                        </div>
+                                        <select className="form-select w-48 text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary">
+                                            <option>Project Root</option>
+                                            <option>User Home</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    );
+}

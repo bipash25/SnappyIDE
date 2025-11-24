@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Workbench Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+      }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#137fec",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+              "surface-dark": "#16222d",
+              "text-light": "#101922",
+              "text-dark": "#e5e7eb",
+              "text-muted-dark": "#92adc9",
+              "border-dark": "#233648"
+            },
+            fontFamily: {
+              "display": ["Space Grotesk", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col">
+<div class="flex h-full min-h-screen w-full">
+<!-- Side Navigation -->
+<aside class="flex w-64 flex-col border-r border-border-dark bg-surface-dark p-4">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Alex Miller's profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD2W5wgx9aWv33FB_SDIg6172fBfYlRsi9gcjEAWxoqOEnzVpI0iRS9LlQjL8GGnvXfhMU6BvmSE6cs_0IUSk0Zc1LIETvA-Ymf_DztUtTU2MFpeiKeqRX04hl8Fj7mIysgP909QwWhuN4saiKf_WkRVVXzjlvUdRkp2zNvkNmmGDB9RID2vmFKaRZWgx9vERyBn-3_Dq_Yey2Y2ikYcuw2_KfftzPLcgEt_Y1QN_1PEvx75CvRZGxuK2LZoJ2ELV36D6rlQXxPpOAm");'></div>
+<div class="flex flex-col">
+<h1 class="text-text-dark text-base font-medium leading-normal">Alex Miller</h1>
+<p class="text-text-muted-dark text-sm font-normal leading-normal">alex.miller@email.com</p>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-dark hover:bg-border-dark" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<p class="text-sm font-medium leading-normal">General</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg bg-border-dark px-3 py-2 text-text-dark" href="#">
+<span class="material-symbols-outlined text-xl !font-bold" style="font-variation-settings: 'FILL' 1;">widgets</span>
+<p class="text-sm font-medium leading-normal">Workbench</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-dark hover:bg-border-dark" href="#">
+<span class="material-symbols-outlined text-xl">code</span>
+<p class="text-sm font-medium leading-normal">Editor</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-dark hover:bg-border-dark" href="#">
+<span class="material-symbols-outlined text-xl">terminal</span>
+<p class="text-sm font-medium leading-normal">Terminal</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-dark hover:bg-border-dark" href="#">
+<span class="material-symbols-outlined text-xl">fork_right</span>
+<p class="text-sm font-medium leading-normal">Source Control</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-dark hover:bg-border-dark" href="#">
+<span class="material-symbols-outlined text-xl">extension</span>
+<p class="text-sm font-medium leading-normal">Extensions</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-dark hover:bg-border-dark" href="#">
+<span class="material-symbols-outlined text-xl">system_update_alt</span>
+<p class="text-sm font-medium leading-normal">Updates</p>
+</a>
+</div>
+</div>
+<div class="mt-auto flex flex-col gap-4">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90">
+<span class="truncate">Sync Settings</span>
+</button>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-dark hover:bg-border-dark" href="#">
+<span class="material-symbols-outlined text-xl">book_4</span>
+<p class="text-sm font-medium leading-normal">Documentation</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-dark hover:bg-border-dark" href="#">
+<span class="material-symbols-outlined text-xl">keyboard</span>
+<p class="text-sm font-medium leading-normal">Keyboard Shortcuts</p>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-8 lg:p-12">
+<div class="mx-auto max-w-4xl">
+<!-- Page Heading -->
+<div class="mb-10">
+<h1 class="text-text-dark text-4xl font-black leading-tight tracking-[-0.033em]">Workbench</h1>
+<p class="text-text-muted-dark text-base font-normal leading-normal mt-2">Customize the appearance and behavior of the workbench.</p>
+</div>
+<!-- Settings List -->
+<div class="flex flex-col space-y-4">
+<!-- Startup Behavior -->
+<div class="flex flex-col gap-6 rounded-lg border border-border-dark bg-surface-dark p-6 md:flex-row md:items-center md:justify-between">
+<div class="flex-1">
+<p class="text-text-dark text-base font-medium leading-normal">Startup Behavior</p>
+<p class="text-text-muted-dark text-sm font-normal leading-normal mt-1">How the editor should behave on startup.</p>
+</div>
+<div class="w-full md:w-60">
+<select class="w-full rounded-lg border-2 border-border-dark bg-background-dark text-text-dark focus:border-primary focus:ring-primary">
+<option>Show Welcome Page</option>
+<option selected="">Restore Last Session</option>
+<option>Open Empty Window</option>
+</select>
+</div>
+</div>
+<!-- Command Palette Position -->
+<div class="flex flex-col gap-6 rounded-lg border border-border-dark bg-surface-dark p-6 md:flex-row md:items-center md:justify-between">
+<div class="flex-1">
+<p class="text-text-dark text-base font-medium leading-normal">Command Palette Position</p>
+<p class="text-text-muted-dark text-sm font-normal leading-normal mt-1">Where the command palette appears on the screen.</p>
+</div>
+<div class="w-full md:w-60">
+<select class="w-full rounded-lg border-2 border-border-dark bg-background-dark text-text-dark focus:border-primary focus:ring-primary">
+<option selected="">Center</option>
+<option>Top</option>
+</select>
+</div>
+</div>
+<!-- Tree Indent Size -->
+<div class="flex flex-col gap-6 rounded-lg border border-border-dark bg-surface-dark p-6 md:flex-row md:items-center md:justify-between">
+<div class="flex-1">
+<p class="text-text-dark text-base font-medium leading-normal">Tree Indent Size</p>
+<p class="text-text-muted-dark text-sm font-normal leading-normal mt-1">The pixel indentation for nested items in the file explorer tree.</p>
+</div>
+<div class="w-full md:w-60">
+<div class="relative">
+<input class="w-full rounded-lg border-2 border-border-dark bg-background-dark pr-8 text-text-dark [appearance:textfield] focus:border-primary focus:ring-primary" type="number" value="8"/>
+<span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-text-muted-dark">px</span>
+</div>
+</div>
+</div>
+<!-- Activity Bar Position -->
+<div class="flex flex-col gap-6 rounded-lg border border-border-dark bg-surface-dark p-6 md:flex-row md:items-center md:justify-between">
+<div class="flex-1">
+<p class="text-text-dark text-base font-medium leading-normal">Activity Bar Position</p>
+<p class="text-text-muted-dark text-sm font-normal leading-normal mt-1">The location of the main activity bar.</p>
+</div>
+<div class="w-full md:w-60">
+<div class="flex gap-4 rounded-lg bg-background-dark p-1">
+<label class="flex-1 cursor-pointer rounded-md py-1.5 text-center text-sm font-medium text-text-muted-dark has-[:checked]:bg-border-dark has-[:checked]:text-text-dark">
+<input checked="" class="sr-only" name="activity-bar" type="radio" value="left"/>
+<span>Left</span>
+</label>
+<label class="flex-1 cursor-pointer rounded-md py-1.5 text-center text-sm font-medium text-text-muted-dark has-[:checked]:bg-border-dark has-[:checked]:text-text-dark">
+<input class="sr-only" name="activity-bar" type="radio" value="right"/>
+<span>Right</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Zen Mode Behavior -->
+<div class="flex flex-col gap-6 rounded-lg border border-border-dark bg-surface-dark p-6 md:flex-row md:justify-between">
+<div class="flex-1">
+<p class="text-text-dark text-base font-medium leading-normal">Zen Mode Behavior</p>
+<p class="text-text-muted-dark text-sm font-normal leading-normal mt-1">Configure what UI elements are hidden in Zen Mode.</p>
+</div>
+<div class="w-full md:w-60">
+<div class="flex flex-col space-y-3">
+<label class="flex items-center gap-3">
+<input checked="" class="h-4 w-4 rounded border-border-dark bg-background-dark text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-text-dark">Hide Activity Bar</span>
+</label>
+<label class="flex items-center gap-3">
+<input checked="" class="h-4 w-4 rounded border-border-dark bg-background-dark text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-text-dark">Hide Status Bar</span>
+</label>
+<label class="flex items-center gap-3">
+<input class="h-4 w-4 rounded border-border-dark bg-background-dark text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-text-dark">Center Layout</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Zoom Controls -->
+<div class="flex flex-col gap-6 rounded-lg border border-border-dark bg-surface-dark p-6 md:flex-row md:items-center md:justify-between">
+<div class="flex-1">
+<p class="text-text-dark text-base font-medium leading-normal">Zoom Controls</p>
+<p class="text-text-muted-dark text-sm font-normal leading-normal mt-1">Show or hide zoom controls in the status bar.</p>
+</div>
+<div class="w-full md:w-60">
+<label class="flex cursor-pointer items-center" for="zoom-toggle">
+<input class="peer sr-only" id="zoom-toggle" type="checkbox"/>
+<div class="relative h-6 w-11 rounded-full bg-border-dark after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-600 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/50"></div>
+<span class="ms-3 text-sm font-medium text-text-dark">Show Zoom Controls</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

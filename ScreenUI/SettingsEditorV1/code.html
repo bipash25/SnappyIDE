@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Snappy IDE - Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#007ACC",
+              "background-light": "#f6f7f8",
+              "background-dark": "#1E1E1E",
+              "surface": "#252526",
+              "surface-hover": "#2A2A2A",
+              "border-color": "#3C3C3C",
+              "text-primary": "#D4D4D4",
+              "text-secondary": "#808080",
+            },
+            fontFamily: {
+              "display": ["Space Grotesk", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display">
+<div class="flex h-screen w-full">
+<aside class="flex w-64 flex-col bg-surface p-4">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Snappy IDE Logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAi6x5qz5evyHaVkSVmvuBiZ23Nzh1xMYxjcgN6g6huxx-Ts7kC7-mtOkMTwmDANfIRz9cNZxQ-_mH5TkdCDbgQVze816_NoTixBfc6Ds7gUUUqxYPq-h1C3yx9aNfEIHTFfEKEvnWedlUHcwbY_6lo2EMWStUltW6Om1hRYJJshBml35tYiCEowkn3ap0mOc_DaIb_fmACzUnemvN7D2FWamzXiwx_wE_drFg009oDcY8JBpK3GRVdm8RnMes1E1p_RHOwniRDxarn");'></div>
+<div class="flex flex-col">
+<h1 class="text-text-primary text-base font-medium leading-normal">Snappy IDE</h1>
+<p class="text-text-secondary text-sm font-normal leading-normal">Settings</p>
+</div>
+</div>
+<nav class="mt-4 flex flex-col gap-1">
+<a class="flex items-center gap-3 rounded-lg bg-primary/20 px-3 py-2 text-primary" href="#">
+<span class="material-symbols-outlined text-xl">edit_square</span>
+<p class="text-sm font-medium leading-normal">Editor</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-primary hover:bg-surface-hover" href="#">
+<span class="material-symbols-outlined text-xl">draft</span>
+<p class="text-sm font-medium leading-normal">Files</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-primary hover:bg-surface-hover" href="#">
+<span class="material-symbols-outlined text-xl">terminal</span>
+<p class="text-sm font-medium leading-normal">Terminal</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-primary hover:bg-surface-hover" href="#">
+<span class="material-symbols-outlined text-xl">space_dashboard</span>
+<p class="text-sm font-medium leading-normal">Workbench</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-primary hover:bg-surface-hover" href="#">
+<span class="material-symbols-outlined text-xl">palette</span>
+<p class="text-sm font-medium leading-normal">Themes</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-primary hover:bg-surface-hover" href="#">
+<span class="material-symbols-outlined text-xl">keyboard</span>
+<p class="text-sm font-medium leading-normal">Keyboard Shortcuts</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-primary hover:bg-surface-hover" href="#">
+<span class="material-symbols-outlined text-xl">extension</span>
+<p class="text-sm font-medium leading-normal">Extensions</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-primary hover:bg-surface-hover" href="#">
+<span class="material-symbols-outlined text-xl">person</span>
+<p class="text-sm font-medium leading-normal">Profiles</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-primary hover:bg-surface-hover" href="#">
+<span class="material-symbols-outlined text-xl">fork_right</span>
+<p class="text-sm font-medium leading-normal">Git</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-primary hover:bg-surface-hover" href="#">
+<span class="material-symbols-outlined text-xl">bug_report</span>
+<p class="text-sm font-medium leading-normal">Debug</p>
+</a>
+</nav>
+</div>
+</aside>
+<main class="flex-1 overflow-y-auto p-8">
+<div class="mx-auto max-w-6xl">
+<div class="sticky top-0 z-10 bg-background-dark py-4">
+<div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary">search</span>
+<input class="form-input w-full rounded-lg border border-border-color bg-surface py-2.5 pl-11 pr-4 text-sm text-text-primary placeholder:text-text-secondary focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Search Settings" type="text" value=""/>
+</div>
+<div class="flex flex-shrink-0">
+<div class="flex h-10 items-center justify-center rounded-lg bg-surface p-1">
+<label class="flex h-full grow cursor-pointer items-center justify-center overflow-hidden rounded-md px-4 py-2 has-[:checked]:bg-background-dark has-[:checked]:text-text-primary">
+<span class="truncate text-sm font-medium">User</span>
+<input checked="" class="invisible w-0" name="settings-scope" type="radio" value="User"/>
+</label>
+<label class="flex h-full grow cursor-pointer items-center justify-center overflow-hidden rounded-md px-4 py-2 text-text-secondary has-[:checked]:bg-background-dark has-[:checked]:text-text-primary">
+<span class="truncate text-sm font-medium">Workspace</span>
+<input class="invisible w-0" name="settings-scope" type="radio" value="Workspace"/>
+</label>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-2">
+<h2 class="mb-6 text-2xl font-bold text-text-primary">Editor Settings</h2>
+<div class="mb-8 border-b border-border-color">
+<nav aria-label="Tabs" class="-mb-px flex space-x-6">
+<a class="whitespace-nowrap border-b-2 border-primary px-1 py-3 text-sm font-medium text-primary" href="#">Text Editing</a>
+<a class="whitespace-nowrap border-b-2 border-transparent px-1 py-3 text-sm font-medium text-text-secondary hover:border-text-secondary hover:text-text-primary" href="#">Cursor</a>
+<a class="whitespace-nowrap border-b-2 border-transparent px-1 py-3 text-sm font-medium text-text-secondary hover:border-text-secondary hover:text-text-primary" href="#">Find</a>
+<a class="whitespace-nowrap border-b-2 border-transparent px-1 py-3 text-sm font-medium text-text-secondary hover:border-text-secondary hover:text-text-primary" href="#">Formatting</a>
+<a class="whitespace-nowrap border-b-2 border-transparent px-1 py-3 text-sm font-medium text-text-secondary hover:border-text-secondary hover:text-text-primary" href="#">Suggestions</a>
+</nav>
+</div>
+<div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+<div class="rounded-lg border border-border-color bg-surface p-6">
+<h3 class="text-text-primary mb-4 text-lg font-bold leading-tight">Font</h3>
+<div class="flex flex-col gap-6">
+<div class="flex flex-col">
+<label class="text-text-primary mb-2 text-sm font-medium leading-normal">Font Family</label>
+<input class="form-input h-10 w-full resize-none overflow-hidden rounded-lg border border-border-color bg-surface p-2.5 text-sm font-normal leading-normal text-text-primary placeholder:text-text-secondary focus:border-primary focus:outline-0 focus:ring-0" value="Space Grotesk, monospace"/>
+<p class="text-text-secondary mt-1 text-xs">Controls the font family.</p>
+</div>
+<div class="flex flex-col">
+<label class="text-text-primary mb-2 text-sm font-medium leading-normal">Font Size</label>
+<input class="form-input h-10 w-full resize-none overflow-hidden rounded-lg border border-border-color bg-surface p-2.5 text-sm font-normal leading-normal text-text-primary placeholder:text-text-secondary focus:border-primary focus:outline-0 focus:ring-0" type="number" value="14"/>
+<p class="text-text-secondary mt-1 text-xs">Controls the font size in pixels.</p>
+</div>
+<div class="flex flex-col">
+<label class="text-text-primary mb-2 text-sm font-medium leading-normal">Line Height</label>
+<input class="form-input h-10 w-full resize-none overflow-hidden rounded-lg border border-border-color bg-surface p-2.5 text-sm font-normal leading-normal text-text-primary placeholder:text-text-secondary focus:border-primary focus:outline-0 focus:ring-0" type="number" value="20"/>
+<p class="text-text-secondary mt-1 text-xs">Controls the line height. Use 0 to compute from font size.</p>
+</div>
+</div>
+</div>
+<div class="rounded-lg border border-border-color bg-surface p-6">
+<h3 class="text-text-primary mb-4 text-lg font-bold leading-tight">Minimap</h3>
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-4">
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="peer sr-only" type="checkbox" value=""/>
+<div class="peer h-6 w-11 rounded-full bg-border-color after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white"></div>
+</label>
+<div>
+<p class="text-text-primary text-sm font-medium">Enable Minimap</p>
+<p class="text-text-secondary text-xs">Controls whether the minimap is shown.</p>
+</div>
+</div>
+<div class="flex flex-col">
+<label class="text-text-primary mb-2 text-sm font-medium leading-normal">Minimap Side</label>
+<select class="form-select h-10 w-full cursor-pointer appearance-none rounded-lg border border-border-color bg-surface bg-[url('data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20fill=%27none%27%20viewBox=%270%200%2020%2020%27%3e%3cpath%20stroke=%27%23808080%27%20stroke-linecap=%27round%27%20stroke-linejoin=%27round%27%20stroke-width=%271.5%27%20d=%27m6%208%204%204%204-4%27/%3e%3c/svg%3e')] bg-right-2.5 bg-no-repeat p-2.5 pr-8 text-sm font-normal text-text-primary focus:border-primary focus:outline-none focus:ring-0">
+<option>right</option>
+<option>left</option>
+</select>
+<p class="text-text-secondary mt-1 text-xs">Controls the side where the minimap is rendered.</p>
+</div>
+<div class="flex flex-col">
+<label class="text-text-primary mb-2 text-sm font-medium leading-normal">Minimap Scale</label>
+<div class="flex items-center justify-between">
+<input class="form-range h-2 w-full cursor-pointer appearance-none rounded-lg bg-border-color accent-primary" max="3" min="1" step="1" type="range" value="1"/>
+<span class="text-text-secondary ml-4 text-sm">1</span>
+</div>
+<p class="text-text-secondary mt-1 text-xs">Controls the size of the minimap.</p>
+</div>
+</div>
+</div>
+<div class="rounded-lg border border-border-color bg-surface p-6">
+<h3 class="text-text-primary mb-4 text-lg font-bold leading-tight">Word Wrap</h3>
+<div class="flex flex-col gap-6">
+<div class="flex flex-col">
+<label class="text-text-primary mb-2 text-sm font-medium leading-normal">Word Wrap</label>
+<select class="form-select h-10 w-full cursor-pointer appearance-none rounded-lg border border-border-color bg-surface bg-[url('data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20fill=%27none%27%20viewBox=%270%200%2020%2020%27%3e%3cpath%20stroke=%27%23808080%27%20stroke-linecap=%27round%27%20stroke-linejoin=%27round%27%20stroke-width=%271.5%27%20d=%27m6%208%204%204%204-4%27/%3e%3c/svg%3e')] bg-right-2.5 bg-no-repeat p-2.5 pr-8 text-sm font-normal text-text-primary focus:border-primary focus:outline-none focus:ring-0">
+<option>off</option>
+<option>on</option>
+<option>wordWrapColumn</option>
+<option>bounded</option>
+</select>
+<p class="text-text-secondary mt-1 text-xs">Controls how lines should wrap.</p>
+</div>
+<div class="flex flex-col">
+<label class="text-text-primary mb-2 text-sm font-medium leading-normal">Word Wrap Column</label>
+<input class="form-input h-10 w-full resize-none overflow-hidden rounded-lg border border-border-color bg-surface p-2.5 text-sm font-normal leading-normal text-text-primary placeholder:text-text-secondary focus:border-primary focus:outline-0 focus:ring-0" type="number" value="80"/>
+<p class="text-text-secondary mt-1 text-xs">Controls the wrapping column of the editor.</p>
+</div>
+</div>
+</div>
+<div class="rounded-lg border border-border-color bg-surface p-6">
+<h3 class="text-text-primary mb-4 text-lg font-bold leading-tight">Tab and Indentation</h3>
+<div class="flex flex-col gap-6">
+<div class="flex flex-col">
+<label class="text-text-primary mb-2 text-sm font-medium leading-normal">Tab Size</label>
+<input class="form-input h-10 w-full resize-none overflow-hidden rounded-lg border border-border-color bg-surface p-2.5 text-sm font-normal leading-normal text-text-primary placeholder:text-text-secondary focus:border-primary focus:outline-0 focus:ring-0" type="number" value="4"/>
+<p class="text-text-secondary mt-1 text-xs">The number of spaces a tab is equal to.</p>
+</div>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="peer sr-only" type="checkbox" value=""/>
+<div class="peer h-6 w-11 rounded-full bg-border-color after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white"></div>
+</label>
+<div>
+<p class="text-text-primary text-sm font-medium">Insert Spaces</p>
+<p class="text-text-secondary text-xs">Insert spaces when pressing Tab.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>
