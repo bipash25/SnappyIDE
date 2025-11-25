@@ -13,8 +13,18 @@ import {
     Download,
     Dumbbell
 } from 'lucide-react';
+import { useFileSystem } from '../contexts/FileSystemContext';
 
 export default function WelcomeScreen({ onOpenProject }) {
+    const { openFolder } = useFileSystem();
+
+    const handleOpenFolder = async () => {
+        const success = await openFolder();
+        if (success) {
+            onOpenProject();
+        }
+    };
+
     return (
         <div className="bg-background-dark font-display text-[#CCCCCC] relative flex h-screen w-full flex-col overflow-hidden">
             <div className="flex h-full w-full flex-col">
@@ -98,7 +108,7 @@ export default function WelcomeScreen({ onOpenProject }) {
                             <p className="text-lg text-gray-400 mt-3 mb-10">Your fast and modern IDE.</p>
 
                             <div className="grid grid-cols-2 gap-4 w-full max-w-lg">
-                                <button onClick={onOpenProject} className="flex w-full cursor-pointer items-center justify-start gap-3 rounded-lg px-4 py-3 text-white bg-[#16212d] hover:bg-white/10 border border-white/10 transition-all hover:border-primary/50 group">
+                                <button onClick={handleOpenFolder} className="flex w-full cursor-pointer items-center justify-start gap-3 rounded-lg px-4 py-3 text-white bg-[#16212d] hover:bg-white/10 border border-white/10 transition-all hover:border-primary/50 group">
                                     <FolderOpen className="w-6 h-6 text-primary group-hover:scale-110 transition-transform" />
                                     <span className="text-base font-medium leading-normal">Open Folder...</span>
                                 </button>

@@ -12,9 +12,10 @@
   "app": {
     "windows": [
       {
-        "title": "snappy",
-        "width": 800,
-        "height": 600
+        "title": "Snappy IDE",
+        "width": 1280,
+        "height": 720,
+        "dragDropEnabled": false
       }
     ],
     "security": {

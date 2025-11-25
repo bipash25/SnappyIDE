@@ -1,5 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MonacoEditor from './MonacoEditor';
+import FileTree from '../FileTree/FileTree';
+import SettingsModal from '../Settings/SettingsModal';
+import TerminalComponent from '../Terminal/Terminal';
+import TabContextMenu from './TabContextMenu';
+import { useFileSystem } from '../../contexts/FileSystemContext';
 import {
     FileText,
     Search,
@@ -19,44 +24,129 @@ import {
     GitBranch,
     RefreshCw,
     AlertCircle,
-    AlertTriangle
+    AlertTriangle,
+    FilePlus,
+    FolderPlus
 } from 'lucide-react';
 
 export default function CodeEditor() {
-    const [files, setFiles] = useState([
-        { name: 'main.rs', language: 'rust', content: '// Welcome to Snappy IDE!\n// Edit this file to get started.\n\nfn main() {\n    println!("Hello, world!");\n}\n' },
-        { name: 'Cargo.toml', language: 'toml', content: '[package]\nname = "snappy"\nversion = "0.1.0"\nedition = "2021"\n\n[dependencies]\n' },
-        { name: 'README.md', language: 'markdown', content: '# Snappy IDE\n\nA fast and modern IDE built with Tauri and React.\n' }
-    ]);
-    const [activeFileIndex, setActiveFileIndex] = useState(0);
+    const {
+        openFiles,
+        activeFileIndex,
+        setActiveFileIndex,
+        closeFile,
+        updateFileContent,
+        rootPath,
+        createFile,
+        createFolder,
+        saveFile,
+        closeOtherFiles,
+        closeFilesToRight,
+        closeAllFiles
+    } = useFileSystem();
 
-    const activeFile = files[activeFileIndex];
+    const [cursorPosition, setCursorPosition] = React.useState({ lineNumber: 1, column: 1 });
+    const [contextMenu, setContextMenu] = React.useState(null);
+    const [isSettingsOpen, setIsSettingsOpen] = React.useState(false);
 
-    const handleFileClick = (index) => {
+    const activeFile = activeFileIndex !== -1 ? openFiles[activeFileIndex] : null;
+
+    // Keyboard Shortcuts
+    React.useEffect(() => {
+        const handleKeyDown = (e) => {
+            // Save: Ctrl+S
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                if (activeFileIndex !== -1) {
+                    saveFile(activeFileIndex);
+                }
+            }
+            // New File: Ctrl+N
+            if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
+                e.preventDefault();
+                handleNewFile();
+            }
+            // Close Tab: Ctrl+W
+            if ((e.ctrlKey || e.metaKey) && e.key === 'w') {
+                e.preventDefault();
+                if (activeFileIndex !== -1) {
+                    closeFile(activeFileIndex);
+                }
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [activeFileIndex, saveFile, closeFile]);
+
+    const handleCursorPositionChange = (position) => {
+        setCursorPosition(position);
+    };
+
+    const handleTabClick = (index) => {
         setActiveFileIndex(index);
     };
 
     const handleTabClose = (e, index) => {
         e.stopPropagation();
-        const newFiles = files.filter((_, i) => i !== index);
-        setFiles(newFiles);
-        if (activeFileIndex >= index && activeFileIndex > 0) {
-            setActiveFileIndex(activeFileIndex - 1);
-        } else if (newFiles.length === 0) {
-            setActiveFileIndex(-1);
-        }
+        closeFile(index);
+    };
+
+    const handleTabContextMenu = (e, index) => {
+        e.preventDefault();
+        setContextMenu({
+            x: e.clientX,
+            y: e.clientY,
+            index
+        });
+    };
+
+    const handleCloseAll = () => {
+        closeAllFiles();
     };
 
     const handleCodeChange = (value) => {
         if (activeFileIndex !== -1) {
-            const newFiles = [...files];
-            newFiles[activeFileIndex].content = value || "";
-            setFiles(newFiles);
+            updateFileContent(activeFileIndex, value);
         }
+    };
+
+    const handleNewFile = async () => {
+        if (!rootPath) return;
+        const name = window.prompt("Enter file name:");
+        if (name) {
+            await createFile(rootPath, name);
+        }
+    };
+
+    const handleNewFolder = async () => {
+        if (!rootPath) return;
+        const name = window.prompt("Enter folder name:");
+        if (name) {
+            await createFolder(rootPath, name);
+        }
+    };
+
+    const getProjectName = (path) => {
+        if (!path) return 'NO FOLDER OPENED';
+        const parts = path.split(/[/\\]/);
+        return parts[parts.length - 1];
     };
 
     return (
         <div className="bg-background-dark font-display text-[#d4d4d4] flex flex-col h-screen w-full overflow-hidden">
+            <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
+            {contextMenu && (
+                <TabContextMenu
+                    x={contextMenu.x}
+                    y={contextMenu.y}
+                    onClose={() => setContextMenu(null)}
+                    onCloseOthers={() => closeOtherFiles(contextMenu.index)}
+                    onCloseToRight={() => closeFilesToRight(contextMenu.index)}
+                    onCloseAll={handleCloseAll}
+                />
+            )}
+
             {/* Title Bar / Menu */}
             <div className="flex-shrink-0 bg-[#1e2d3b] text-white text-xs px-2 select-none">
                 <div className="flex items-center h-8 space-x-4">
@@ -101,7 +191,11 @@ export default function CodeEditor() {
                             <div className="text-[#808080] hover:text-white cursor-pointer" title="Account">
                                 <UserCircle className="w-6 h-6" />
                             </div>
-                            <div className="text-[#808080] hover:text-white cursor-pointer" title="Settings">
+                            <div
+                                className="text-[#808080] hover:text-white cursor-pointer"
+                                title="Settings"
+                                onClick={() => setIsSettingsOpen(true)}
+                            >
                                 <Settings className="w-6 h-6" />
                             </div>
                         </div>
@@ -109,32 +203,23 @@ export default function CodeEditor() {
 
                     {/* Sidebar */}
                     <div className="w-64 bg-background-dark p-2 flex flex-col border-r border-white/10">
-                        <h2 className="text-xs uppercase text-[#808080] font-bold px-2 mb-2">Explorer</h2>
-                        <div className="flex-1 overflow-y-auto">
+                        <div className="flex items-center justify-between px-2 mb-2">
+                            <h2 className="text-xs uppercase text-[#808080] font-bold">Explorer</h2>
+                            <div className="flex items-center gap-1">
+                                <button onClick={handleNewFile} className="p-1 hover:bg-white/10 rounded" title="New File">
+                                    <FilePlus className="w-4 h-4 text-[#808080] hover:text-white" />
+                                </button>
+                                <button onClick={handleNewFolder} className="p-1 hover:bg-white/10 rounded" title="New Folder">
+                                    <FolderPlus className="w-4 h-4 text-[#808080] hover:text-white" />
+                                </button>
+                            </div>
+                        </div>
+                        <div className="flex-1 overflow-y-auto flex flex-col">
                             <div className="text-sm font-semibold text-white mb-2 flex items-center cursor-pointer">
                                 <ChevronDown className="w-4 h-4 mr-1" />
-                                SNAPPY_PROJECT
+                                {getProjectName(rootPath)}
                             </div>
-                            <ul className="space-y-1 pl-2 text-sm">
-                                <li className="flex items-center space-x-2 pl-4 text-white hover:bg-white/10 rounded py-0.5 cursor-pointer">
-                                    <Folder className="w-4 h-4 text-yellow-500" />
-                                    <span>src</span>
-                                </li>
-                                {files.map((file, index) => (
-                                    <li key={index} onClick={() => handleFileClick(index)} className={`flex items-center space-x-2 pl-8 text-white hover:bg-white/10 rounded py-0.5 cursor-pointer ${activeFileIndex === index ? 'bg-primary/20' : ''}`}>
-                                        <FileText className="w-4 h-4 text-blue-400" />
-                                        <span className="font-semibold">{file.name}</span>
-                                    </li>
-                                ))}
-                                <li className="flex items-center space-x-2 pl-4 text-white hover:bg-white/10 rounded py-0.5 cursor-pointer">
-                                    <Folder className="w-4 h-4 text-yellow-500" />
-                                    <span>target</span>
-                                </li>
-                                <li className="flex items-center space-x-2 pl-4 text-white hover:bg-white/10 rounded py-0.5 cursor-pointer">
-                                    <FileText className="w-4 h-4" />
-                                    <span>.gitignore</span>
-                                </li>
-                            </ul>
+                            <FileTree />
                         </div>
                     </div>
                 </div>
@@ -145,17 +230,19 @@ export default function CodeEditor() {
                         {/* Editor Tabs */}
                         <div className="flex border-b border-white/10 flex-shrink-0 items-center justify-between pr-3 bg-[#101922]">
                             <div className="flex overflow-x-auto">
-                                {files.map((file, index) => (
+                                {openFiles.map((file, index) => (
                                     <div
                                         key={index}
-                                        onClick={() => handleFileClick(index)}
-                                        className={`flex items-center justify-center gap-2 px-4 py-2 border-r border-white/10 cursor-pointer min-w-[120px] ${activeFileIndex === index ? 'bg-background-dark border-t-2 border-primary text-white' : 'text-[#808080] hover:bg-white/5'}`}
+                                        onClick={() => handleTabClick(index)}
+                                        onContextMenu={(e) => handleTabContextMenu(e, index)}
+                                        className={`flex items-center justify-center gap-2 px-4 py-2 border-r border-white/10 cursor-pointer min-w-[120px] max-w-[200px] ${activeFileIndex === index ? 'bg-background-dark border-t-2 border-primary text-white' : 'text-[#808080] hover:bg-white/5'}`}
                                     >
-                                        <FileText className={`w-4 h-4 ${activeFileIndex === index ? 'text-blue-400' : ''}`} />
-                                        <p className="text-sm font-medium leading-normal truncate">{file.name}</p>
+                                        <FileText className={`w-4 h-4 flex-shrink-0 ${activeFileIndex === index ? 'text-blue-400' : ''}`} />
+                                        <p className="text-sm font-medium leading-normal truncate" title={file.path}>{file.name}</p>
+                                        {file.isDirty && <div className="w-2 h-2 rounded-full bg-white ml-1" />}
                                         <X
                                             onClick={(e) => handleTabClose(e, index)}
-                                            className={`w-4 h-4 rounded-full p-0.5 ${activeFileIndex === index ? 'text-white/70 hover:text-white hover:bg-white/10' : 'text-transparent group-hover:text-white/70 hover:text-white hover:bg-white/10'}`}
+                                            className={`w-4 h-4 rounded-full p-0.5 flex-shrink-0 ${activeFileIndex === index ? 'text-white/70 hover:text-white hover:bg-white/10' : 'text-transparent group-hover:text-white/70 hover:text-white hover:bg-white/10'}`}
                                         />
                                     </div>
                                 ))}
@@ -175,19 +262,28 @@ export default function CodeEditor() {
 
                         {/* Editor Content */}
                         <div className="flex flex-1 overflow-hidden relative">
-                            {activeFileIndex !== -1 ? (
+                            {activeFile ? (
                                 <MonacoEditor
+                                    key={activeFile.path} // Force re-render on file switch to ensure content updates
                                     code={activeFile.content}
                                     onChange={handleCodeChange}
+                                    onCursorPositionChange={handleCursorPositionChange}
                                     language={activeFile.language}
                                 />
                             ) : (
-                                <div className="flex items-center justify-center h-full text-[#808080]">
-                                    No file open
+                                <div className="flex flex-col items-center justify-center h-full text-[#808080]">
+                                    <div className="text-6xl mb-4 opacity-20">
+                                        <FileText />
+                                    </div>
+                                    <p className="text-lg">No file is open</p>
+                                    <p className="text-sm opacity-60 mt-2">Open a file from the explorer to start editing</p>
                                 </div>
                             )}
                         </div>
                     </div>
+
+
+
 
                     {/* Bottom Panel (Terminal) */}
                     <div className="h-48 flex-shrink-0 border-t border-white/10 flex flex-col bg-[#101922]">
@@ -207,8 +303,8 @@ export default function CodeEditor() {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex-1 p-2 font-mono text-sm bg-background-dark overflow-y-auto text-[#cccccc]">
-                            <p>user@snappy-dev:~$ <span className="bg-primary animate-pulse w-2 h-4 inline-block align-middle"></span></p>
+                        <div className="flex-1 bg-[#101922] overflow-hidden">
+                            <TerminalComponent />
                         </div>
                     </div>
                 </div>
@@ -228,7 +324,7 @@ export default function CodeEditor() {
                 </div>
                 <div className="flex items-center gap-4">
                     <div className="hover:bg-white/20 px-1 rounded cursor-pointer">
-                        <span>Ln 6, Col 2</span>
+                        <span>Ln {cursorPosition.lineNumber}, Col {cursorPosition.column}</span>
                     </div>
                     <div className="hover:bg-white/20 px-1 rounded cursor-pointer">
                         <span>Spaces: 4</span>
@@ -237,7 +333,7 @@ export default function CodeEditor() {
                         <span>UTF-8</span>
                     </div>
                     <div className="hover:bg-white/20 px-1 rounded cursor-pointer">
-                        <span>Rust</span>
+                        <span>{activeFile ? activeFile.language : 'Plain Text'}</span>
                     </div>
                     <div className="flex items-center gap-1 hover:bg-white/20 px-1 rounded cursor-pointer" title="Errors">
                         <AlertCircle className="w-3 h-3" />
